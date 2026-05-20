@@ -3,7 +3,7 @@
 A production-style ROS 2 sensor data pipeline with custom messages,
 moving-average filtering, CSV logging, unit tests, and CI/CD.
 
-![CI](https://github.com/YOUR_USERNAME/sensor_pipeline/actions/workflows/ros2.yml/badge.svg)
+![CI](https://github.com/Aditya2545/sensor_pipeline/actions/workflows/ros2.yml/badge.svg)
 
 ## Demo
 
