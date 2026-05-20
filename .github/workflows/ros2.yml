@@ -1,0 +1,37 @@
+name: ROS 2 CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up ROS 2 Humble
+      uses: ros-tooling/setup-ros@v0.7
+      with:
+        required-ros-distributions: humble
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        rosdep update
+        rosdep install --from-paths . --ignore-src -r -y
+
+    - name: Build
+      run: |
+        source /opt/ros/humble/setup.bash
+        colcon build --symlink-install
+
+    - name: Test
+      run: |
+        source /opt/ros/humble/setup.bash
+        source install/setup.bash
+        colcon test --packages-select sensor_pipeline
+        colcon test-result --verbose
